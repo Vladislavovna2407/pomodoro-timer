@@ -20,7 +20,7 @@ let timerId = (setInterval(() => {
 
 const start = document.getElementById('start');
 const pomodoroTime = document.getElementById('pomodoro-time');
-let time = 120;
+let time = 1500;
 
 
 function changeTime() {
