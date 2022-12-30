@@ -1,54 +1,32 @@
-/*let start = document.getElementById("start");
-let pomodoroTime = document.getElementById('pomodoro-time')
-let time = 120;
-let timerId = (setInterval(() => {
-    const minites = Math.floor(time / 60);
-    let seconds = time % 60;
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-    pomodoroTime.textContent = `${minites}:${seconds}`
-    time--;
-    if (seconds < 0) {
-        clearInterval(timerId);
-        start.textContent = "start";
-        pomodoroTime.textContent = "25:00";
-    }
-}, 1000));*/
-
-
-
-const start = document.getElementById('start');
-const pomodoroTime = document.getElementById('pomodoro-time');
+let button = document.getElementById('start');
+let pomodoroTime = document.getElementById('pomodoro-time');
 let time = 1500;
-
-
-function changeTime() {
-    const minites = Math.floor(time / 60);
-    let seconds = time % 60;
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-    pomodoroTime.textContent = `${minites}:${seconds}`
-    time--;
-
-};
+let timerId;
+let seconds;
 
 function makeTimer() {
-    const timerId = setInterval(changeTime, 1000);
-    start.textContent = "stop";
-    if (seconds < 0) {
+    let minutes = Math.floor(time / 60);
+    seconds = time % 60;
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    };
+    if (time <= 0) {
         clearInterval(timerId);
-        start.textContent = "start";
-        pomodoroTime.textContent = "25:00";
-    }
-
-
-};
-start.addEventListener('click', makeTimer);
-
-function stopTime() {
-
-    clearInterval(timerId);
+    };
+    time--;
+    pomodoroTime.textContent = `${minutes}:${seconds}`;
 }
-start.addEventListener('click', stopTime);
+
+function changeTime() {
+    if (button.textContent == "start") {
+        button.textContent = "stop";
+        timerId = setInterval(makeTimer, 1000)
+
+
+    } else if (button.textContent == "stop") {
+        button.textContent = "start";
+        clearInterval(timerId);
+    }
+}
+
+addEventListener('click', changeTime);
